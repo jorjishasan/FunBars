@@ -2,8 +2,6 @@
 
 import {
   BadgePercentIcon,
-  ChartNoAxesCombinedIcon,
-  CirclePercentIcon,
   DollarSignIcon,
   ShoppingBagIcon,
   TrendingUpIcon
@@ -15,7 +13,8 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 
-const salesPlanPercentage = 54
+import VehicleOverviewCard from '@/components/shadcn-studio/blocks/widget-vehicle-overview'
+
 const totalBars = 20
 const filledBars = 12
 
@@ -177,43 +176,7 @@ const SalesMetricsCard = ({ className }: { className?: string }) => {
             </CardFooter>
           </Card>
         </div>
-        <Card className='shadow-none'>
-          <CardContent className='grid gap-6 px-6 py-6 lg:grid-cols-5'>
-            <div className='flex flex-col justify-center gap-6'>
-              <span className='text-lg font-semibold'>Sales plan</span>
-              <span className='text-6xl font-semibold'>{salesPlanPercentage}%</span>
-              <span className='text-muted-foreground text-sm'>Percentage profit from total sales</span>
-            </div>
-            <div className='flex flex-col gap-6 md:col-span-4'>
-              <span className='text-lg font-semibold'>Cohort analysis indicators</span>
-              <span className='text-muted-foreground text-sm leading-relaxed'>
-                Analyzes the behaviour of a group of users who joined a product/service at the same time. over a certain
-                period.
-              </span>
-              <div className='grid gap-6 md:grid-cols-2'>
-                <div className='flex flex-row items-center gap-2'>
-                  <ChartNoAxesCombinedIcon className='h-6 w-6 shrink-0' />
-                  <span className='text-lg font-medium'>Open Statistics</span>
-                </div>
-                <div className='flex flex-row items-center gap-2'>
-                  <CirclePercentIcon className='h-6 w-6 shrink-0' />
-                  <span className='text-lg font-medium'>Percentage Change</span>
-                </div>
-              </div>
-
-              <div className='flex flex-row gap-1'>
-                {Array.from({ length: totalBars }, (_, index) => (
-                  <div
-                    key={index}
-                    className={`h-4 w-2 flex-1 rounded ${
-                      index < filledBars ? 'bg-foreground' : 'bg-muted'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <VehicleOverviewCard />
       </CardContent>
     </Card>
   )
