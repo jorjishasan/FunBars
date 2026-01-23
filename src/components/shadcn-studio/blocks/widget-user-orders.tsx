@@ -75,7 +75,7 @@ const UserOrdersCard = () => {
             <span className='text-muted-foreground text-sm'>Orders</span>
           </div>
           <Tabs defaultValue='shipped' className='flex flex-col flex-1 justify-between gap-6'>
-            <TabsList className='bg-muted text-muted-foreground inline-flex h-9 items-center justify-center rounded-lg p-[3px] w-full'>
+            <TabsList className='bg-muted inline-flex h-9 items-center justify-center rounded-lg p-[3px] w-full'>
               <TabsTrigger
                 value='packed'
                 className='h-[calc(100%-1px)] flex-1 justify-center rounded-md border border-transparent py-1 text-sm font-medium whitespace-nowrap data-[state=active]:bg-background data-[state=active]:shadow-sm flex items-center gap-1 px-1.5'
