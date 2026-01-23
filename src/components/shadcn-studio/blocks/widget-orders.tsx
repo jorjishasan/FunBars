@@ -1,10 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { Check, Circle, EllipsisVertical, MapPin, UserCheck, X } from 'lucide-react'
 
-import { MapPin, MoreVertical, User } from 'lucide-react'
-
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Card, CardHeader } from '@/components/ui/card'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,9 +11,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Separator } from '@/components/ui/separator'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-
-import { cn } from '@/lib/utils'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 interface Order {
   id: string
@@ -28,75 +25,153 @@ interface Order {
   }
 }
 
-const ordersData: Order[] = [
+const newOrdersData: Order[] = [
   {
     id: '1',
     sender: {
-      name: 'Mytrle Ullrich',
-      address: '101 Boulder, California(CA), 959595'
+      name: 'Rahman Ahmed',
+      address: '101 Dhanmondi, Dhaka(BD), 1205'
     },
     receiver: {
-      name: 'Barry Schowalter',
-      address: '939 orange, California(CA), 92118'
+      name: 'Fatima Khan',
+      address: '203 Gulshan, Dhaka(BD), 1212'
     }
   },
   {
     id: '2',
     sender: {
-      name: 'Lucas Smith',
-      address: '203 Riverdale, New York(NY), 10001'
+      name: 'Hasan Ali',
+      address: '305 Mirpur, Dhaka(BD), 1216'
     },
     receiver: {
-      name: 'Emma Johnson',
-      address: '305 Maple Avenue, Austin, Texas(TX), 73301'
+      name: 'Ayesha Rahman',
+      address: '407 Uttara, Dhaka(BD), 1230'
     }
-  },
+  }
+]
+
+const pendingOrdersData: Order[] = [
   {
     id: '3',
     sender: {
-      name: 'Sarah Williams',
-      address: '456 Oak Street, Los Angeles(CA), 90001'
+      name: 'Karim Uddin',
+      address: '501 Banani, Dhaka(BD), 1213'
     },
     receiver: {
-      name: 'Michael Brown',
-      address: '789 Pine Road, Seattle(WA), 98101'
+      name: 'Nusrat Jahan',
+      address: '603 Wari, Dhaka(BD), 1203'
     }
   },
   {
     id: '4',
     sender: {
-      name: 'Emily Davis',
-      address: '321 Elm Avenue, Chicago(IL), 60601'
+      name: 'Shahid Hossain',
+      address: '705 Motijheel, Dhaka(BD), 1000'
     },
     receiver: {
-      name: 'David Wilson',
-      address: '654 Cedar Lane, Miami(FL), 33101'
+      name: 'Tasnim Begum',
+      address: '807 Tejgaon, Dhaka(BD), 1208'
     }
   }
 ]
 
-const OrdersCard = ({ className }: { className?: string }) => {
-  const [activeTab, setActiveTab] = useState('new')
-  const deliveriesInProgress = 75
+const shippingOrdersData: Order[] = [
+  {
+    id: '5',
+    sender: {
+      name: 'Mohammad Ali',
+      address: '901 Chittagong, Chittagong(BD), 4000'
+    },
+    receiver: {
+      name: 'Sultana Akter',
+      address: '1003 Sylhet, Sylhet(BD), 3100'
+    }
+  },
+  {
+    id: '6',
+    sender: {
+      name: 'Abdul Rahman',
+      address: '1105 Rajshahi, Rajshahi(BD), 6000'
+    },
+    receiver: {
+      name: 'Rashida Khatun',
+      address: '1207 Khulna, Khulna(BD), 9000'
+    }
+  }
+]
 
-  const tabs = [
-    { id: 'new', label: 'New' },
-    { id: 'pending', label: 'Pending' },
-    { id: 'shipping', label: 'Shipping' }
-  ]
+const OrderItem = ({ order }: { order: Order }) => (
+  <>
+    <li className='grid items-center text-primary gap-x-4'>
+      <div
+        role='status'
+        className='timeline-dot col-start-2 col-end-3 row-start-1 row-end-1 flex items-center justify-center rounded-full border border-current border-none mb-1.25 [&>*:not(:nth-child(4))]:hidden [&>*:nth-child(4)]:block'
+      >
+        <Circle className='size-2.5' />
+        <Check className='size-3' />
+        <X className='size-3' />
+        <UserCheck className='text-primary size-4' />
+      </div>
+      <hr
+        role='separator'
+        aria-orientation='vertical'
+        className='col-start-2 col-end-3 row-start-2 row-end-2 mx-auto flex h-full min-h-16 w-0.5 justify-center rounded-full border-l border-dashed border-muted bg-transparent'
+      />
+      <p
+        role='heading'
+        aria-level={3}
+        className='row-start-1 row-end-1 line-clamp-1 max-w-full truncate col-start-3 col-end-4 mr-auto text-left text-primary text-sm font-normal'
+      >
+        Sender
+      </p>
+      <div className='text-card-foreground row-start-2 row-end-2 col-start-3 col-end-4 mr-auto text-left flex flex-col gap-0.5 pb-2'>
+        <span className='font-medium'>{order.sender.name}</span>
+        <span className='text-muted-foreground text-sm'>{order.sender.address}</span>
+      </div>
+    </li>
+    <li className='grid items-center text-primary mt-2 gap-x-4'>
+      <div
+        role='status'
+        className='timeline-dot col-start-2 col-end-3 row-start-1 row-end-1 flex items-center justify-center rounded-full border border-current border-none [&>*:not(:nth-child(4))]:hidden [&>*:nth-child(4)]:block'
+      >
+        <Circle className='size-2.5' />
+        <Check className='size-3' />
+        <X className='size-3' />
+        <MapPin className='text-primary size-4' />
+      </div>
+      <p
+        role='heading'
+        aria-level={3}
+        className='row-start-1 row-end-1 line-clamp-1 max-w-full truncate col-start-3 col-end-4 mr-auto text-left text-primary text-sm font-normal'
+      >
+        Receiver
+      </p>
+      <div className='text-card-foreground row-start-2 row-end-2 col-start-3 col-end-4 mr-auto text-left mt-0.5 flex flex-col gap-0.5 pb-0'>
+        <span className='font-medium'>{order.receiver.name}</span>
+        <span className='text-muted-foreground text-sm'>{order.receiver.address}</span>
+      </div>
+    </li>
+  </>
+)
 
+const OrdersCard = () => {
   return (
-    <Card className={cn('flex h-[380px] flex-col', className)}>
-      <CardHeader className='flex flex-row items-start justify-between pb-2'>
+    <Card className='bg-card text-card-foreground flex flex-col rounded-xl border shadow-sm gap-4 xl:col-span-2'>
+      <CardHeader className='!flex !flex-row items-start justify-between space-y-0 gap-2 px-6 pb-0'>
         <div className='flex flex-col gap-1'>
-          <span className='text-2xl font-semibold'>Orders</span>
-          <span className='text-muted-foreground text-sm'>{deliveriesInProgress} Deliveries in progress</span>
+          <span className='text-lg font-semibold'>Orders</span>
+          <span className='text-muted-foreground text-sm'>75 Deliveries in progress</span>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className='text-muted-foreground hover:text-foreground'>
-              <MoreVertical className='h-5 w-5' />
-            </button>
+            <Button
+              variant='ghost'
+              size='icon'
+              className='text-muted-foreground hover:bg-accent hover:text-accent-foreground size-6 shrink-0 rounded-full ml-auto'
+            >
+              <EllipsisVertical className='size-4' />
+              <span className='sr-only'>Menu</span>
+            </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuItem>View All</DropdownMenuItem>
@@ -105,64 +180,73 @@ const OrdersCard = ({ className }: { className?: string }) => {
           </DropdownMenuContent>
         </DropdownMenu>
       </CardHeader>
-      <CardContent className='flex flex-1 flex-col gap-0 overflow-hidden pt-0'>
-        {/* Tab Navigation */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className='w-full'>
-          <TabsList className='h-auto w-full justify-start rounded-none border-b bg-transparent p-0'>
-            {tabs.map((tab) => (
-              <TabsTrigger
-                key={tab.id}
-                value={tab.id}
-                className='rounded-none border-b-2 border-transparent data-[state=active]:border-foreground data-[state=active]:bg-transparent data-[state=active]:shadow-none'
-              >
-                {tab.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
-
-        {/* Orders List */}
-        <div className='flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
-          {ordersData.map((order, index) => (
-            <div key={order.id}>
-              <div className='flex gap-4 p-4'>
-                {/* Dotted Connection Line */}
-                <div className='relative flex flex-col items-center pt-1'>
-                  <div className='flex h-6 w-6 items-center justify-center'>
-                    <User className='h-4 w-4 text-muted-foreground' />
-                  </div>
-                  <div className='my-2 h-full w-px border-l-2 border-dotted border-muted-foreground/40' />
-                  <div className='flex h-6 w-6 items-center justify-center'>
-                    <MapPin className='h-4 w-4 text-muted-foreground' />
-                  </div>
-                </div>
-
-                {/* Order Content */}
-                <div className='flex-1 space-y-6'>
-                  {/* Sender */}
-                  <div className='flex flex-col gap-2'>
-                    <span className='text-sm font-medium'>Sender</span>
-                    <div className='flex flex-col gap-1'>
-                      <span className='text-sm font-semibold'>{order.sender.name}</span>
-                      <span className='text-muted-foreground text-xs'>{order.sender.address}</span>
-                    </div>
-                  </div>
-
-                  {/* Receiver */}
-                  <div className='flex flex-col gap-2'>
-                    <span className='text-sm font-medium'>Receiver</span>
-                    <div className='flex flex-col gap-1'>
-                      <span className='text-sm font-semibold'>{order.receiver.name}</span>
-                      <span className='text-muted-foreground text-xs'>{order.receiver.address}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {index < ordersData.length - 1 && <Separator />}
+      <Tabs defaultValue='new' className='flex flex-col gap-4'>
+        <TabsList className='text-muted-foreground inline-flex h-9 items-center justify-center bg-background w-full rounded-none border-b p-0'>
+          <TabsTrigger
+            value='new'
+            className='inline-flex flex-1 items-center justify-center gap-1.5 px-2 py-1 text-sm font-medium whitespace-nowrap bg-background data-[state=active]:border-primary h-full rounded-none border-0 border-b-2 border-transparent'
+          >
+            New
+          </TabsTrigger>
+          <TabsTrigger
+            value='pending'
+            className='inline-flex flex-1 items-center justify-center gap-1.5 px-2 py-1 text-sm font-medium whitespace-nowrap bg-background data-[state=active]:border-primary h-full rounded-none border-0 border-b-2 border-transparent'
+          >
+            Pending
+          </TabsTrigger>
+          <TabsTrigger
+            value='shipping'
+            className='inline-flex flex-1 items-center justify-center gap-1.5 px-2 py-1 text-sm font-medium whitespace-nowrap bg-background data-[state=active]:border-primary h-full rounded-none border-0 border-b-2 border-transparent'
+          >
+            Shipping
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value='new' className='outline-none flex flex-col gap-4'>
+          <div className='flex flex-col gap-4 pr-6 pl-2'>
+            <ul className='grid [&>li]:grid-cols-[0_min-content_1fr]'>
+              <OrderItem order={newOrdersData[0]} />
+            </ul>
+            <div className='pl-4'>
+              <Separator />
             </div>
-          ))}
-        </div>
-      </CardContent>
+          </div>
+          <div className='flex flex-col gap-4 pr-6 pl-2'>
+            <ul className='grid [&>li]:grid-cols-[0_min-content_1fr]'>
+              <OrderItem order={newOrdersData[1]} />
+            </ul>
+          </div>
+        </TabsContent>
+        <TabsContent value='pending' className='outline-none flex flex-col gap-4'>
+          <div className='flex flex-col gap-4 pr-6 pl-2'>
+            <ul className='grid [&>li]:grid-cols-[0_min-content_1fr]'>
+              <OrderItem order={pendingOrdersData[0]} />
+            </ul>
+            <div className='pl-4'>
+              <Separator />
+            </div>
+          </div>
+          <div className='flex flex-col gap-4 pr-6 pl-2'>
+            <ul className='grid [&>li]:grid-cols-[0_min-content_1fr]'>
+              <OrderItem order={pendingOrdersData[1]} />
+            </ul>
+          </div>
+        </TabsContent>
+        <TabsContent value='shipping' className='outline-none flex flex-col gap-4'>
+          <div className='flex flex-col gap-4 pr-6 pl-2'>
+            <ul className='grid [&>li]:grid-cols-[0_min-content_1fr]'>
+              <OrderItem order={shippingOrdersData[0]} />
+            </ul>
+            <div className='pl-4'>
+              <Separator />
+            </div>
+          </div>
+          <div className='flex flex-col gap-4 pr-6 pl-2'>
+            <ul className='grid [&>li]:grid-cols-[0_min-content_1fr]'>
+              <OrderItem order={shippingOrdersData[1]} />
+            </ul>
+          </div>
+        </TabsContent>
+      </Tabs>
     </Card>
   )
 }

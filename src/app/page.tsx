@@ -50,21 +50,15 @@ const DashboardShell = () => {
           </div>
 
           {/* Bottom Row: User Orders, Orders, Popular Products */}
-          <div className='col-span-full grid gap-6 lg:grid-cols-12'>
-            {/* User Orders Card - Left */}
-            <div className='lg:col-span-3'>
-              <UserOrdersCard />
-            </div>
+          <div className='col-span-full grid gap-6 lg:grid-cols-2 xl:grid-cols-6'>
+            {/* User Orders Card */}
+            <UserOrdersCard />
 
-            {/* Orders Card - Middle */}
-            <div className='lg:col-span-4'>
-              <OrdersCard />
-            </div>
+            {/* Orders Card */}
+            <OrdersCard />
 
-            {/* Popular Products - Right */}
-            <div className='lg:col-span-5'>
-              <PopularProductsCard />
-            </div>
+            {/* Popular Products */}
+            <PopularProductsCard />
           </div>
 
           {/* Product Table - Full Width */}

@@ -1,7 +1,8 @@
 'use client'
 
-import { MoreVertical } from 'lucide-react'
+import { EllipsisVertical } from 'lucide-react'
 
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import {
   DropdownMenu,
@@ -9,9 +10,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import { Separator } from '@/components/ui/separator'
-
-import { cn } from '@/lib/utils'
 
 interface Product {
   id: string
@@ -32,48 +30,51 @@ const products: Product[] = [
   {
     id: '2',
     name: 'Adidas Ultraboost 21',
-    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/dashboard-application/widgets/image%201.png',
+    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/dashboard-application/widgets/image%202.png',
     price: '$4,500',
     visitors: '4.5K'
   },
   {
     id: '3',
     name: 'Puma RS-X Toys',
-    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/dashboard-application/widgets/image%201.png',
+    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/dashboard-application/widgets/image%203.png',
     price: '$3,200',
     visitors: '2K'
   },
   {
     id: '4',
     name: 'New Balance 550',
-    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/dashboard-application/widgets/image%201.png',
+    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/dashboard-application/widgets/image%204.png',
     price: '$2,800',
     visitors: '1.8K'
   },
   {
     id: '5',
     name: 'Reebok Classic Leather',
-    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/dashboard-application/widgets/image%201.png',
+    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/dashboard-application/widgets/image%205.png',
     price: '$2,200',
     visitors: '1.2K'
   }
 ]
 
-const PopularProductsCard = ({ className }: { className?: string }) => {
-  const totalVisitors = '10.4K'
-
+const PopularProductsCard = () => {
   return (
-    <Card className={cn('flex h-[380px] flex-col', className)}>
-      <CardHeader className='flex flex-row items-start justify-between pb-2'>
+    <Card className='flex flex-col rounded-xl border shadow-sm gap-3 xl:col-span-2'>
+      <CardHeader className='!flex !flex-row items-start justify-between space-y-0 gap-2 px-6 pb-0'>
         <div className='flex flex-col gap-1'>
           <span className='text-lg font-semibold'>Popular product</span>
-          <span className='text-muted-foreground text-sm'>Total {totalVisitors} visitors</span>
+          <span className='text-muted-foreground text-sm'>Total 10.4K visitors</span>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className='text-muted-foreground hover:text-foreground'>
-              <MoreVertical className='h-5 w-5' />
-            </button>
+            <Button
+              variant='ghost'
+              size='icon'
+              className='text-muted-foreground hover:bg-accent hover:text-accent-foreground size-6 shrink-0 rounded-full ml-auto'
+            >
+              <EllipsisVertical className='size-4' />
+              <span className='sr-only'>Menu</span>
+            </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuItem>View All</DropdownMenuItem>
@@ -81,24 +82,21 @@ const PopularProductsCard = ({ className }: { className?: string }) => {
           </DropdownMenuContent>
         </DropdownMenu>
       </CardHeader>
-      <CardContent className='flex flex-1 flex-col gap-0 overflow-hidden pt-0'>
-        <div className='flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
-          {products.map((product, index) => (
-            <div key={product.id}>
-              <div className='flex items-center gap-3 p-3'>
-                <img src={product.image} alt={product.name} className='h-12 w-12 shrink-0 rounded-md object-cover' />
-                <div className='flex flex-1 flex-col gap-1'>
-                  <span className='text-sm font-semibold'>{product.name}</span>
-                  <div className='flex items-center justify-between'>
-                    <span className='text-muted-foreground text-xs'>{product.price}</span>
-                    <span className='text-muted-foreground text-xs'>{product.visitors}</span>
-                  </div>
-                </div>
+      <CardContent className='px-6 flex flex-1 flex-col justify-between gap-3'>
+        {products.map((product) => (
+          <div key={product.id} className='flex items-center justify-between gap-2'>
+            <div className='flex items-center justify-between gap-2'>
+              <div className='p-2'>
+                <img src={product.image} alt={product.name} className='size-[42px]' />
               </div>
-              {index < products.length - 1 && <Separator />}
+              <div className='flex flex-col gap-0.5'>
+                <span className='font-medium'>{product.name}</span>
+                <span className='text-muted-foreground text-xs'>{product.price}</span>
+              </div>
             </div>
-          ))}
-        </div>
+            <span className='text-muted-foreground text-sm'>{product.visitors}</span>
+          </div>
+        ))}
       </CardContent>
     </Card>
   )
