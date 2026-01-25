@@ -1,106 +1,138 @@
-import {
-  FacebookIcon,
-  GithubIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  TwitterIcon
-} from 'lucide-react'
-
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { getAllDashboards } from '@/lib/dashboard-config'
+import { ArrowRightIcon, BarChart3Icon, TruckIcon } from 'lucide-react'
 
-import EarningInsightsCard from '@/components/shadcn-studio/blocks/widget-earning-insights'
-import KPICards from '@/components/shadcn-studio/blocks/kpi-cards'
-import OrdersCard from '@/components/shadcn-studio/blocks/widget-orders'
-import PopularProductsCard from '@/components/shadcn-studio/blocks/widget-popular-products'
-import ProductTable from '@/components/shadcn-studio/blocks/product-table'
-import UserOrdersCard from '@/components/shadcn-studio/blocks/widget-user-orders'
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case 'active':
+      return 'bg-green-100 text-green-800'
+    case 'development':
+      return 'bg-yellow-100 text-yellow-800'
+    case 'planned':
+      return 'bg-gray-100 text-gray-800'
+    default:
+      return 'bg-gray-100 text-gray-800'
+  }
+}
 
-const DashboardShell = () => {
+const getDashboardIcon = (id: string) => {
+  switch (id) {
+    case 'productsales':
+      return <BarChart3Icon className="h-8 w-8" />
+    case 'vehiclesales':
+      return <TruckIcon className="h-8 w-8" />
+    default:
+      return <BarChart3Icon className="h-8 w-8" />
+  }
+}
+
+const DashboardLanding = () => {
+  const dashboards = getAllDashboards()
+
   return (
-    <div className='flex min-h-dvh w-full flex-col bg-background'>
-      {/* Dark Header */}
-      <header className='bg-slate-900 text-white'>
-        <div className='mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6'>
-          <div className='flex items-center gap-4'>
-            <span className='text-lg font-semibold'>Product Sales Dashboard</span>
-          </div>
-          <div className='flex items-center gap-2'>
-            <Button variant='ghost' size='sm' className='text-white hover:bg-slate-800'>
-              Settings
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">
+                Unified Dashboard System
+              </h1>
+              <p className="mt-1 text-sm text-gray-600">
+                Access all your business dashboards from one place
+              </p>
+            </div>
+            <Button variant="outline">
+              Admin Panel
             </Button>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className='mx-auto size-full max-w-7xl flex-1 py-6'>
-        <div data-slot='card-content' className='px-6 grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-6'>
-          {/* KPI Cards Container */}
-          <div className='grid gap-6 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:col-span-2'>
-            <KPICards />
+      <main className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        {/* Welcome Section */}
+        <div className="text-center mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Welcome to Your Dashboard Hub
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Choose from the available dashboards below to access detailed analytics, 
+            reports, and insights for different areas of your business.
+          </p>
+        </div>
+
+        {/* Dashboard Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {dashboards.map((dashboard) => (
+            <Card key={dashboard.id} className="hover:shadow-lg transition-shadow duration-200">
+              <CardHeader className="pb-4">
+                <div className="flex items-center justify-between">
+                  <div className={`p-3 rounded-lg bg-${dashboard.color}-100 text-${dashboard.color}-600`}>
+                    {getDashboardIcon(dashboard.id)}
+                  </div>
+                  <Badge className={getStatusColor(dashboard.status)}>
+                    {dashboard.status}
+                  </Badge>
+                </div>
+                <CardTitle className="text-xl">{dashboard.title}</CardTitle>
+                <CardDescription className="text-gray-600">
+                  {dashboard.description}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <Link href={dashboard.route}>
+                  <Button 
+                    className="w-full group" 
+                    disabled={dashboard.status === 'planned'}
+                  >
+                    {dashboard.status === 'active' ? 'Open Dashboard' : 
+                     dashboard.status === 'development' ? 'View Progress' : 'Coming Soon'}
+                    <ArrowRightIcon className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Stats Section */}
+        <div className="mt-16 bg-white rounded-xl shadow-sm border p-8">
+          <div className="text-center mb-8">
+            <h3 className="text-xl font-semibold text-gray-900">System Overview</h3>
           </div>
-
-          {/* Earning Insights Card */}
-          <div className='col-span-full lg:max-xl:-order-1 xl:col-span-4'>
-            <EarningInsightsCard />
-          </div>
-
-          {/* User Orders Card */}
-          <UserOrdersCard />
-
-          {/* Orders Card */}
-          <OrdersCard />
-
-          {/* Popular Products */}
-          <PopularProductsCard />
-
-          {/* Product Table - Full Width */}
-          <div className='col-span-full'>
-            <ProductTable />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-600 mb-2">
+                {dashboards.filter(d => d.status === 'active').length}
+              </div>
+              <p className="text-gray-600">Active Dashboards</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-yellow-600 mb-2">
+                {dashboards.filter(d => d.status === 'development').length}
+              </div>
+              <p className="text-gray-600">In Development</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-gray-600 mb-2">
+                {dashboards.length}
+              </div>
+              <p className="text-gray-600">Total Dashboards</p>
+            </div>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className='bg-slate-900 text-white'>
-        <div className='mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 max-sm:flex-col sm:gap-6 sm:px-6'>
-          <p className='text-sm'>
-            {`©${new Date().getFullYear()}`}{' '}
-            <a href='#' className='text-primary hover:underline'>
-              shadcn/studio
-            </a>
-          </p>
-          <div className='flex items-center gap-4'>
-            <a href='#' className='text-sm hover:underline'>
-              All Products
-            </a>
-            <a href='#' className='text-sm hover:underline'>
-              Countries
-            </a>
-            <a href='#' className='text-sm hover:underline'>
-              License
-            </a>
-            <a href='#' className='text-sm hover:underline'>
-              FAQ
-            </a>
-            <a href='#' className='text-sm hover:underline'>
-              Support
-            </a>
-          </div>
-          <div className='flex items-center gap-4'>
-            <a href='#' className='hover:text-primary'>
-              <FacebookIcon className='h-4 w-4' />
-            </a>
-            <a href='#' className='hover:text-primary'>
-              <InstagramIcon className='h-4 w-4' />
-            </a>
-            <a href='#' className='hover:text-primary'>
-              <TwitterIcon className='h-4 w-4' />
-            </a>
-            <a href='#' className='hover:text-primary'>
-              <GithubIcon className='h-4 w-4' />
-            </a>
+      <footer className="bg-white border-t mt-20">
+        <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+          <div className="text-center text-gray-600">
+            <p>&copy; {new Date().getFullYear()} Unified Dashboard System. Built for scalable business intelligence.</p>
           </div>
         </div>
       </footer>
@@ -108,4 +140,4 @@ const DashboardShell = () => {
   )
 }
 
-export default DashboardShell
+export default DashboardLanding
