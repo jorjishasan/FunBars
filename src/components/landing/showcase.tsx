@@ -1,5 +1,6 @@
 import Image from "next/image"
-import { ArrowRight, ExternalLink } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight, ExternalLink, Sparkles } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
@@ -8,22 +9,11 @@ interface Template {
   description: string
   image: string
   features: string[]
-  status: "Available" | "Coming Soon"
+  status: "FREE" | "Coming Soon" | "PRO"
   link: string
 }
 
 const templates: Template[] = [
-  {
-    title: "Strategic Dashboards",
-    description: "Strategic dashboards designed to help you make data-driven decisions.",
-    image: "https://cdn.shadcnstudio.com/ss-assets/landing-page/dashboard-1-light.png",
-    features: [
-      "Creative motion to enhance user interaction and engagement.",
-      "Fully customizable with multiple theme support."
-    ],
-    status: "Coming Soon",
-    link: "/dashboards/productsales"
-  },
   {
     title: "Dashboard & Application",
     description: "Customizable dashboards and app templates for eCommerce, CRM, SAAS, logistics, and more.",
@@ -32,8 +22,19 @@ const templates: Template[] = [
       "Simple integration with your business logic or API.",
       "Charts, widgets, and stats to visualize key insights."
     ],
-    status: "Coming Soon",
-    link: "#"
+    status: "FREE",
+    link: "/dashboards/productsales"
+  },
+  {
+    title: "Strategic Dashboards",
+    description: "Strategic dashboards designed to help you make data-driven decisions.",
+    image: "https://cdn.shadcnstudio.com/ss-assets/landing-page/dashboard-1-light.png",
+    features: [
+      "Creative motion to enhance user interaction and engagement.",
+      "Fully customizable with multiple theme support."
+    ],
+    status: "PRO",
+    link: "/dashboards/productsales"
   },
   {
     title: "Sales & Marketing Dashboards",
@@ -43,7 +44,7 @@ const templates: Template[] = [
       "Multi-page, fully functional templates with real-use UX.",
       "Easily integrates with your business logic or API."
     ],
-    status: "Coming Soon",
+    status: "PRO",
     link: "#"
   }
 ]
@@ -64,11 +65,12 @@ export function ShowcaseSection() {
               Ready-to-Use Templates
             </Badge>
             <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-slate-900" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
-              Explore 10+ Premium <br className="hidden md:block" />
-              <span className="relative inline-block">
-                <span className="relative z-10">Shadcn Dashboard Templates</span>
-                <span className="absolute bottom-2 left-0 w-full h-3 bg-yellow-100/50 -z-0 -rotate-1" />
-              </span>
+              <span className="relative inline-block mx-2">
+                <span className="relative z-10">10+ Premium</span>
+                <span className="absolute bottom-1.5 left-0 w-full h-3 bg-yellow-100 -z-0 -rotate-1" />
+              </span> 
+              <br className="hidden sm:block" />
+              Shadcn Dashboard Templates
             </h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto font-light">
               From strategic dashboards to sales and marketing dashboards, everything you need to create modern, responsive, and visually stunning dashboards - ready to go in no time!
@@ -97,11 +99,26 @@ export function ShowcaseSection() {
                 )}
                 <div className="px-4 sm:px-6 lg:px-8">
                   <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    <div className={`space-y-8 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                      <Badge variant="secondary" className="rounded-full px-4 py-1 text-xs font-medium bg-slate-100 text-slate-600 border-slate-200">
+                  <div className={`space-y-8 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                    <div className="flex items-center gap-3">
+                      <Badge 
+                        variant={template.status === "PRO" ? "default" : "secondary"} 
+                        className={`rounded-full px-4 py-1 text-xs font-semibold tracking-wide ${
+                          template.status === "PRO" 
+                            ? "bg-slate-900 text-white border-transparent" 
+                            : "bg-slate-100 text-slate-600 border-slate-200"
+                        }`}
+                      >
+                        {template.status === "PRO" && <Sparkles className="w-3 h-3 mr-1 inline-block text-yellow-400" />}
                         {template.status}
                       </Badge>
-                      
+                      {template.status === "PRO" && (
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                          Premium Choice
+                        </span>
+                      )}
+                    </div>
+                    
                     <div className="space-y-4">
                       <h3 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
                         {template.title}
@@ -120,11 +137,22 @@ export function ShowcaseSection() {
                       ))}
                     </ul>
 
-                      <Button variant="outline" className="group rounded-full px-8 h-14 border-slate-200 hover:bg-slate-50 hover:text-slate-900 text-base shadow-sm hover:shadow-md transition-all">
-                        Explore more
-                        <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    <Link href={template.link} className="inline-block">
+                      <Button 
+                        variant={template.status === "PRO" ? "default" : "outline"} 
+                        className={`group rounded-full px-8 h-14 text-base shadow-sm transition-all duration-300 ${
+                          template.status === "PRO" 
+                            ? "bg-slate-900 text-white hover:bg-slate-800 hover:shadow-xl hover:-translate-y-0.5" 
+                            : "border-slate-200 hover:bg-slate-50 hover:text-slate-900"
+                        }`}
+                      >
+                        {template.status === "PRO" ? "Get PRO Access" : "Get Started"}
+                        <ArrowRight className={`ml-2 w-4 h-4 transition-transform group-hover:translate-x-1 ${
+                          template.status === "PRO" ? "text-yellow-400" : ""
+                        }`} />
                       </Button>
-                    </div>
+                    </Link>
+                  </div>
 
                     <div className={`relative ${index % 2 === 1 ? 'lg:order-1' : ''} group`}>
                     <div className="relative rounded-2xl overflow-hidden border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-white aspect-[16/10] group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-500">
