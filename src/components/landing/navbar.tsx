@@ -23,9 +23,9 @@ const containerVariants = {
 }
 
 const menuItems = [
-  { name: 'Labs', color: 'bg-gradient-to-br from-yellow-400/40 to-yellow-500/30 border-yellow-300/40 text-yellow-50 hover:border-yellow-400/60', textColor: 'yellow', rotation: 3 },
-  { name: 'Portfolio', color: 'bg-gradient-to-br from-cyan-400/40 to-cyan-500/30 border-cyan-300/40 text-cyan-50 hover:border-cyan-400/60', textColor: 'cyan', rotation: -4 },
-  { name: 'Discord', color: 'bg-gradient-to-br from-fuchsia-400/40 to-fuchsia-500/30 border-fuchsia-300/40 text-fuchsia-50 hover:border-fuchsia-400/60', textColor: 'fuchsia', rotation: 2.5 }
+  { name: 'Labs', href: 'https://zeer.studio', color: 'bg-gradient-to-br from-yellow-400/40 to-yellow-500/30 border-yellow-300/40 text-yellow-50 hover:border-yellow-400/60', textColor: 'yellow', rotation: 3 },
+  { name: 'Portfolio', href: 'https://jorjishasan.com', color: 'bg-gradient-to-br from-cyan-400/40 to-cyan-500/30 border-cyan-300/40 text-cyan-50 hover:border-cyan-400/60', textColor: 'cyan', rotation: -4 },
+  { name: 'Discord', href: 'https://algokids.vercel.app', color: 'bg-gradient-to-br from-fuchsia-400/40 to-fuchsia-500/30 border-fuchsia-300/40 text-fuchsia-50 hover:border-fuchsia-400/60', textColor: 'fuchsia', rotation: 2.5 }
 ]
 
 const menuItemVariants = {
@@ -66,10 +66,10 @@ export const Navbar = () => {
             <div className="flex items-center">
               <Link 
                 href="/" 
-                className="text-white italic text-lg sm:text-xl font-bold tracking-wide hover:opacity-80 transition-opacity duration-300 whitespace-nowrap"
+                className="text-white italic text-lg sm:text-xl lg:text-2xl font-bold tracking-wide hover:opacity-80 transition-opacity duration-300 whitespace-nowrap"
                 style={{ fontFamily: 'var(--font-instrument-serif)' }}
               >
-                IceBars
+               FunBars
               </Link>
             </div>
 
@@ -103,7 +103,7 @@ export const Navbar = () => {
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden"
               >
-                <div className="px-4 sm:px-5 py-3 sm:py-4 flex flex-wrap gap-2 pb-6">
+                <div className="px-4 sm:px-5 py-3 sm:py-4 flex flex-wrap gap-2 pb-6 xl:pb-8">
                   {menuItems.map((item, index) => (
                     <m.div
                       key={item.name}
@@ -114,7 +114,9 @@ export const Navbar = () => {
                       exit="closed"
                     >
                       <Link
-                        href={`#${item.name.toLowerCase()}`}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         onClick={() => setIsMenuOpen(false)}
                         className={`inline-flex items-center gap-1 ${item.color} backdrop-blur-md border text-xs sm:text-sm font-medium py-1.5 sm:py-2 px-3.5 sm:px-5 rounded-full transition-all duration-300 group hover:scale-105 hover:shadow-lg active:scale-95`}
                       >

@@ -32,18 +32,18 @@ export const HeroContent = () => {
         >
           <Link 
             href="/dashboards/productsales"
-            className="group relative bg-white text-black px-10 py-4 rounded-full overflow-hidden transition-all duration-500 hover:shadow-[0_0_50px_-10px_rgba(255,255,255,0.5)] active:scale-[0.98] flex flex-col items-center justify-center"
+            className="group relative bg-white text-black px-10 py-4 rounded-full text-black/90  overflow-hidden transition-all duration-500 hover:shadow-[0_0_50px_-10px_rgba(255,255,255,0.5)] active:scale-[0.98] flex flex-col items-center justify-center"
           >
             {/* Double-line Text Slide */}
             <div className="relative h-7 overflow-hidden pointer-events-none">
               <span 
-                className="block text-lg sm:text-xl font-medium tracking-tight transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-full"
+                className="block text-lg sm:text-xl font-medium  transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-full"
                 style={{ fontFamily: 'var(--font-instrument-serif)' }}
               >
                 Explore Templates
               </span>
               <span 
-                className="absolute inset-0 block text-lg sm:text-xl font-medium tracking-tight transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] translate-y-full group-hover:translate-y-0 italic text-neutral-600"
+                className="absolute inset-0 block text-lg sm:text-xl font-medium transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] translate-y-full group-hover:translate-y-0 italic text-neutral-600"
                 style={{ fontFamily: 'var(--font-instrument-serif)' }}
               >
                 Free Preview
