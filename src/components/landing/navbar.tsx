@@ -103,7 +103,7 @@ export const Navbar = () => {
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden"
               >
-                <div className="px-4 sm:px-5 py-3 sm:py-4 flex flex-wrap gap-2 pb-6 xl:pb-8">
+                <div className="px-4 sm:px-5 py-3 sm:py-4 flex flex-wrap gap-2 pb-10 lg:pb-12">
                   {menuItems.map((item, index) => (
                     <m.div
                       key={item.name}
