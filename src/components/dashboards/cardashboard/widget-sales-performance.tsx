@@ -76,7 +76,7 @@ const SalesPerformanceCard = ({ className }: { className?: string }) => {
                     className='bg-primary/20 relative w-full overflow-hidden h-2 rounded-[2px]'
                   >
                     <div
-                      className='bg-orange-500 h-full w-full flex-1 transition-all'
+                      className='bg-orange-600 h-full w-full flex-1 transition-all'
                       style={{
                         transform: isActive ? 'translateX(0%)' : 'translateX(-100%)'
                       }}

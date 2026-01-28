@@ -29,9 +29,9 @@ const vehicleStatuses = [
     percentage: 23.5,
     duration: '3hr 15min',
     icon: <ArrowDown className='size-4' />,
-    color: 'bg-orange-500',
-    iconColor: 'text-orange-500',
-    barColor: 'bg-orange-500'
+    color: 'bg-orange-600',
+    iconColor: 'text-orange-600',
+    barColor: 'bg-orange-600'
   },
   {
     label: 'Loading',
