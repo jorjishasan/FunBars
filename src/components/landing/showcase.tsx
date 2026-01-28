@@ -37,6 +37,17 @@ const templates: Template[] = [
     link: "/dashboards/productsales"
   },
   {
+    title: "Logistics Dashboard",
+    description: "Comprehensive logistics management dashboard with vehicle tracking, driver stats, and shipment analytics.",
+    image: "https://cdn.shadcnstudio.com/ss-assets/landing-page/dashboard-3-light.png", // Using placeholder image for now
+    features: [
+      "Real-time vehicle tracking and status updates.",
+      "Driver performance metrics and delivery analytics."
+    ],
+    status: "FREE",
+    link: "/dashboards/logistics"
+  },
+  {
     title: "Sales & Marketing Dashboards",
     description: "Sales and marketing dashboards designed to help you track your sales and marketing performance.",
     image: "https://cdn.shadcnstudio.com/ss-assets/landing-page/dashboard-3-light.png",
