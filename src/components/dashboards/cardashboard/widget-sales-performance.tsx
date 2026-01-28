@@ -16,15 +16,15 @@ import { Separator } from '@/components/ui/separator'
 const SalesPerformanceCard = ({ className }: { className?: string }) => {
   return (
     <Card className={className}>
-      <CardHeader className='flex flex-col items-start gap-2 pb-0 px-6'>
+      <CardHeader className='flex flex-col items-start gap-1 pb-0 px-6'>
         <div className='flex w-full items-center justify-between gap-2'>
           <div className='flex items-center gap-2'>
             <span className='relative flex shrink-0 overflow-hidden size-8 rounded-sm'>
-              <span className='flex size-full items-center justify-center bg-primary/10 text-primary shrink-0 rounded-sm'>
+              <span className='flex size-full items-center justify-center bg-primary/10 text-primary shrink-0 rounded-md'>
                 <Sparkles className='size-4' />
               </span>
             </span>
-            <span className='text-lg font-semibold'>Sales performance</span>
+            <span className='text-lg'>Sales performance</span>
           </div>
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
@@ -38,7 +38,7 @@ const SalesPerformanceCard = ({ className }: { className?: string }) => {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center pb-3 gap-2'>
           <span className='text-2xl font-semibold'>68K</span>
           <Badge
             variant='secondary'
@@ -48,7 +48,7 @@ const SalesPerformanceCard = ({ className }: { className?: string }) => {
           </Badge>
         </div>
       </CardHeader>
-      <CardContent className='flex flex-1 flex-col gap-4 px-6 pt-6'>
+      <CardContent className='flex flex-1 flex-col gap-4 px-6 pt-0'>
         <Separator className='bg-border shrink-0 h-px w-full' />
         <div className='grid flex-1 grid-cols-2'>
           {/* Online Store Column */}
@@ -66,7 +66,7 @@ const SalesPerformanceCard = ({ className }: { className?: string }) => {
               </div>
             </div>
             {/* Stacked Bars - using gap-2 as requested */}
-            <div className='flex flex-1 flex-col justify-between gap-3'>
+            <div className='flex flex-1 flex-col justify-between gap-[10px]'>
               {Array.from({ length: 10 }).map((_, index) => {
                 // 88 score -> ~9/10 bars filled (index 1 to 9). 0 is top (empty).
                 const isActive = index >= 1
