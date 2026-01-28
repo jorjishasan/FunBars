@@ -1,6 +1,6 @@
 'use client'
 
-import { MoreHorizontal, Sparkles } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -11,15 +11,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { Separator } from '@/components/ui/separator'
 
 const SalesPerformanceCard = ({ className }: { className?: string }) => {
   return (
     <Card className={className}>
-      <CardHeader className='flex flex-col items-start gap-2 border-b pb-6 px-6'>
+      <CardHeader className='flex flex-col items-start gap-2 pb-0 px-6'>
         <div className='flex w-full items-center justify-between gap-2'>
           <div className='flex items-center gap-2'>
-            <span className='relative flex shrink-0 overflow-hidden size-8 rounded-md'>
-              <span className='flex size-full items-center justify-center bg-muted text-foreground shrink-0 rounded-md'>
+            <span className='relative flex shrink-0 overflow-hidden size-8 rounded-sm'>
+              <span className='flex size-full items-center justify-center bg-primary/10 text-primary shrink-0 rounded-sm'>
                 <Sparkles className='size-4' />
               </span>
             </span>
@@ -27,7 +28,7 @@ const SalesPerformanceCard = ({ className }: { className?: string }) => {
           </div>
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
-              <Button variant='outline' size='sm' className='h-8 px-3 text-xs font-medium'>
+              <Button variant='outline' size='sm' className='h-7 px-2 py-1 text-xs'>
                 Details
               </Button>
             </DropdownMenuTrigger>
@@ -41,13 +42,14 @@ const SalesPerformanceCard = ({ className }: { className?: string }) => {
           <span className='text-2xl font-semibold'>68K</span>
           <Badge
             variant='secondary'
-            className='bg-muted text-foreground hover:bg-muted/80 rounded-md px-2 py-0.5 text-xs font-medium'
+            className='bg-primary/10 text-primary hover:bg-primary/5 rounded-sm px-2 py-0.5 text-xs font-medium'
           >
             -6%
           </Badge>
         </div>
       </CardHeader>
       <CardContent className='flex flex-1 flex-col gap-4 px-6 pt-6'>
+        <Separator className='bg-border shrink-0 h-px w-full' />
         <div className='grid flex-1 grid-cols-2'>
           {/* Online Store Column */}
           <div className='flex flex-1 flex-col gap-2.5 p-2'>
@@ -57,25 +59,27 @@ const SalesPerformanceCard = ({ className }: { className?: string }) => {
                 <span className='text-2xl font-medium'>88</span>
                 <Badge
                   variant='secondary'
-                  className='bg-muted text-foreground hover:bg-muted/80 rounded-md px-3 py-0.5 text-xs font-medium'
+                  className='bg-primary/10 text-primary hover:bg-primary/5 rounded-sm px-3 py-0.5 text-xs font-medium'
                 >
                   Good
                 </Badge>
               </div>
             </div>
-            {/* Stacked Bars - 8 total, filling from bottom */}
-            <div className='flex flex-1 flex-col justify-between gap-2'>
-              {[0, 1, 2, 3, 4, 5, 6, 7].map((index) => {
-                // Total 8 bars. Score 88 corresponds to ~7 bars filled (indices 1 to 7). Index 0 is empty.
-                const isActive = index >= 1 
+            {/* Stacked Bars - using gap-2 as requested */}
+            <div className='flex flex-1 flex-col justify-between gap-3'>
+              {Array.from({ length: 10 }).map((_, index) => {
+                // 88 score -> ~9/10 bars filled (index 1 to 9). 0 is top (empty).
+                const isActive = index >= 1
                 return (
                   <div
                     key={index}
-                    className='bg-muted relative w-full overflow-hidden h-2.5 rounded-sm'
+                    className='bg-primary/20 relative w-full overflow-hidden h-2 rounded-[2px]'
                   >
                     <div
                       className='bg-orange-500 h-full w-full flex-1 transition-all'
-                      style={{ transform: isActive ? 'translateX(0%)' : 'translateX(-100%)' }}
+                      style={{
+                        transform: isActive ? 'translateX(0%)' : 'translateX(-100%)'
+                      }}
                     />
                   </div>
                 )
@@ -91,25 +95,27 @@ const SalesPerformanceCard = ({ className }: { className?: string }) => {
                 <span className='text-2xl font-medium'>64</span>
                 <Badge
                   variant='secondary'
-                  className='bg-muted text-foreground hover:bg-muted/80 rounded-md px-3 py-0.5 text-xs font-medium'
+                  className='bg-primary/10 text-primary hover:bg-primary/5 rounded-sm px-3 py-0.5 text-xs font-medium'
                 >
                   Average
                 </Badge>
               </div>
             </div>
-            {/* Stacked Bars - 8 total, filling from bottom */}
+            {/* Stacked Bars - using gap-2 as requested */}
             <div className='flex flex-1 flex-col justify-between gap-2'>
-              {[0, 1, 2, 3, 4, 5, 6, 7].map((index) => {
-                // Total 8 bars. Score 64 corresponds to ~5 bars filled (indices 3 to 7). Indices 0-2 empty.
-                const isActive = index >= 3
+              {Array.from({ length: 10 }).map((_, index) => {
+                // 64 score -> ~6/10 bars filled. Top 4 empty (0-3). 4-9 filled.
+                const isActive = index >= 4
                 return (
                   <div
                     key={index}
-                    className='bg-muted relative w-full overflow-hidden h-2.5 rounded-sm'
+                    className='bg-primary/20 relative w-full overflow-hidden h-2 rounded-[2px]'
                   >
                     <div
                       className='bg-teal-600 h-full w-full flex-1 transition-all'
-                      style={{ transform: isActive ? 'translateX(0%)' : 'translateX(-100%)' }}
+                      style={{
+                        transform: isActive ? 'translateX(0%)' : 'translateX(-100%)'
+                      }}
                     />
                   </div>
                 )
