@@ -37,7 +37,7 @@ export const HeroContent = () => {
             {/* Double-line Text Slide */}
             <div className="relative h-7 overflow-hidden pointer-events-none">
               <span 
-                className="block text-lg sm:text-xl font-medium  transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-full"
+                className="block text-lg mx-[0.5em] text-neutral-600 sm:text-xl font-medium italic transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-full"
                 style={{ fontFamily: 'var(--font-instrument-serif)' }}
               >
                 Explore Templates
