@@ -16,7 +16,7 @@ export default function CarDashboard() {
       <AppSidebar />
       <SidebarInset>
         <AppNavbar />
-        <div className='flex flex-1 flex-col gap-6 p-4 sm:px-6 sm:py-6 bg-background max-w-7xl mx-auto w-full'>
+        <div className='flex flex-1 flex-col gap-6 p-4 px-0 sm:py-6 bg-background max-w-7xl mx-auto w-full'>
           <div className='grid grid-cols-6 gap-6'>
             <VehicleOverviewCard className='col-span-full xl:col-span-3 rounded-[14px]' />
             <UserProfileCard className='col-span-full md:col-span-3 rounded-[14px]' />
