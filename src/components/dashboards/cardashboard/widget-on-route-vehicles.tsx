@@ -125,10 +125,10 @@ const OnRouteVehiclesCard = ({ className }: { className?: string }) => {
                       className={cn(
                         'h-2 w-full',
                         vehicle.status === 'normal'
-                          ? '[&>div]:bg-orange-500 bg-orange-100'
+                          ? '[&>div]:bg-orange-500 bg-secondary'
                           : vehicle.status === 'warning'
-                          ? '[&>div]:bg-teal-500 bg-teal-100'
-                          : '[&>div]:bg-orange-500 bg-orange-100'
+                          ? '[&>div]:bg-teal-500 bg-secondary'
+                          : '[&>div]:bg-orange-500 bg-secondary'
                       )}
                     />
                     <span className='text-sm font-medium'>{vehicle.progress}%</span>
