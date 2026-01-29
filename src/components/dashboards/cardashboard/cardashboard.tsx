@@ -1,5 +1,6 @@
 'use client'
 
+import { AppIconRail } from '@/components/dashboards/cardashboard/app-icon-rail'
 import { AppNavbar } from '@/components/dashboards/cardashboard/app-navbar'
 import { AppSidebar } from '@/components/dashboards/cardashboard/app-sidebar'
 import CustomerRatingsCard from '@/components/dashboards/cardashboard/widget-customer-ratings'
@@ -12,21 +13,40 @@ import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 
 export default function CarDashboard() {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <AppNavbar />
-        <div className='flex flex-1 flex-col gap-6 p-4 px-0 sm:py-6 bg-background max-w-7xl mx-auto w-full'>
-          <div className='grid grid-cols-6 gap-6'>
-            <VehicleOverviewCard className='col-span-full xl:col-span-3 rounded-[14px]' />
-            <UserProfileCard className='col-span-full md:col-span-3 rounded-[14px]' />
-            <SalesPerformanceCard className='col-span-full md:col-span-3 xl:col-span-2 rounded-[14px]' />
-            <VehiclesConditionCard className='col-span-full md:col-span-3 xl:col-span-2 rounded-[14px]' />
-            <CustomerRatingsCard className='col-span-full md:col-span-3 xl:col-span-2 rounded-[14px]' />
-            <OnRouteVehiclesCard className='col-span-full rounded-[14px]' />
-          </div>
+    <>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          #car-dashboard-wrapper .car-dashboard-sidebar {
+            left: 4rem !important;
+          }
+          #car-dashboard-wrapper [data-state=collapsed] .car-dashboard-sidebar {
+            left: calc(4rem - var(--sidebar-width)) !important;
+          }
+        `
+      }} />
+      <div id="car-dashboard-wrapper" className="flex h-screen overflow-hidden">
+        <AppIconRail />
+        <div className="ml-16 flex flex-1 flex-col overflow-hidden">
+          <SidebarProvider defaultOpen>
+            <AppSidebar />
+            <SidebarInset className="overflow-hidden">
+              <div className="flex h-full flex-col border-r">
+                <AppNavbar />
+                <main className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+                  <div className="grid grid-cols-6 gap-6">
+                    <VehicleOverviewCard className="col-span-full rounded-[14px] xl:col-span-3" />
+                    <UserProfileCard className="col-span-full rounded-[14px] md:col-span-3" />
+                    <SalesPerformanceCard className="col-span-full rounded-[14px] md:col-span-3 xl:col-span-2" />
+                    <VehiclesConditionCard className="col-span-full rounded-[14px] md:col-span-3 xl:col-span-2" />
+                    <CustomerRatingsCard className="col-span-full rounded-[14px] md:col-span-3 xl:col-span-2" />
+                    <OnRouteVehiclesCard className="col-span-full rounded-[14px]" />
+                  </div>
+                </main>
+              </div>
+            </SidebarInset>
+          </SidebarProvider>
         </div>
-      </SidebarInset>
-    </SidebarProvider>
+      </div>
+    </>
   )
 }

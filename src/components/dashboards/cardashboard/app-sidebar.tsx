@@ -68,7 +68,7 @@ const settings = [
 
 export function AppSidebar() {
   return (
-    <div className="bg-muted sticky top-0 flex h-dvh w-72 flex-col border-r max-lg:hidden">
+    <div className="bg-muted sticky top-0 flex h-dvh w-[260px] flex-col border-r max-lg:hidden">
       <div className="px-4 py-3.5 text-lg font-semibold">Logistics</div>
       <div className="mt-5 flex flex-col px-4">
         <div className="mb-4 grid grid-cols-2 gap-4">

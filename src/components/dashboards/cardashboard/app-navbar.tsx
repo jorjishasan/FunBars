@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { Activity, Bell, Languages, Search, BarChart3, FileText, TrendingUp, LayoutDashboard } from "lucide-react"
 
 import { Input } from "@/components/ui/input"
-import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -19,6 +18,7 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import ProfileDropdown from "@/components/dashboards/productsales/dropdown-profile"
+import { SidebarTrigger } from "@/components/ui/sidebar"
 
 export function AppNavbar() {
   const [language, setLanguage] = useState('english')
@@ -26,9 +26,9 @@ export function AppNavbar() {
 
   return (
     <header className="bg-card sticky top-0 z-50 flex items-center justify-between gap-6 border-b px-4 py-2 sm:px-6">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 sm:gap-6">
+      <div className="mx-auto flex w-full items-center justify-between gap-4 sm:gap-6">
         <div className="flex items-center gap-4 flex-1">
-          <SidebarTrigger className="md:hidden" />
+          {/* <SidebarTrigger className="md:hidden size-7" /> */}
           <div className="relative flex-1 max-w-2xl">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
