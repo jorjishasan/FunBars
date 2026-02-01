@@ -58,7 +58,7 @@ export const BorderBeam = ({
             left: -borderWidth,
             right: -borderWidth,
             bottom: -borderWidth,
-            offsetPath: `rect(0 100% 100% 0 round 12px)`,
+            offsetPath: `rect(0 100% 100% 0 round 14px)`,
             ...(className ? {} : { "--color-from": colorFrom, "--color-to": colorTo }),
             ...style,
           } as MotionStyle

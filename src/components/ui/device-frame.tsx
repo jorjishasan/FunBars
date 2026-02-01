@@ -224,20 +224,8 @@ export function DeviceFrameContent({
           <div className="absolute bottom-1.5 sm:bottom-2 left-1/2 -translate-x-1/2 w-24 sm:w-32 h-1 bg-white/30 rounded-full z-10" />
         )}
 
-        <div 
-          className={cn(
-            "w-full h-full bg-white overflow-hidden isolate",
-            isDesktop && "rounded-xl",
-            !isDesktop && "rounded-[1.5rem] sm:rounded-[2rem]"
-          )}
-          style={!isDesktop ? { 
-            WebkitMaskImage: '-webkit-radial-gradient(white, black)',
-            maskImage: 'radial-gradient(white, black)'
-          } : undefined}
-        >
-          <div className="w-full h-full overflow-auto">
-            {children}
-          </div>
+        <div className="w-full h-full bg-white overflow-auto">
+          {children}
         </div>
       </div>
     </div>
