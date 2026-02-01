@@ -23,7 +23,7 @@ const containerVariants = {
 }
 
 const menuItems = [
-  { name: 'Labs', href: 'https://zeer.studio', color: 'bg-gradient-to-br from-yellow-400/40 to-yellow-500/30 border-yellow-300/40 text-yellow-50 hover:border-yellow-400/60', textColor: 'yellow', rotation: 3 },
+  { name: 'Studio', href: 'https://zeer.studio', color: 'bg-gradient-to-br from-yellow-400/40 to-yellow-500/30 border-yellow-300/40 text-yellow-50 hover:border-yellow-400/60', textColor: 'yellow', rotation: 3 },
   { name: 'Portfolio', href: 'https://jorjishasan.com', color: 'bg-gradient-to-br from-cyan-400/40 to-cyan-500/30 border-cyan-300/40 text-cyan-50 hover:border-cyan-400/60', textColor: 'cyan', rotation: -4 },
   { name: 'Discord', href: 'https://algokids.vercel.app', color: 'bg-gradient-to-br from-fuchsia-400/40 to-fuchsia-500/30 border-fuchsia-300/40 text-fuchsia-50 hover:border-fuchsia-400/60', textColor: 'fuchsia', rotation: 2.5 }
 ]
