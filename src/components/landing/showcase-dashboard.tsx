@@ -136,7 +136,7 @@ function DashboardPreviewCard({ template }: DashboardPreviewCardProps) {
             {template.name}
           </h2>
         </div>
-        <p className="text-sm text-zinc-500 leading-relaxed max-w-2xl sm:pl-12">
+        <p className="text-zinc-500 leading-normal max-w-md sm:pl-12 text-pretty">
           {template.description}
         </p>
       </div>
