@@ -1,11 +1,11 @@
-import { ShowcaseSection } from './showcase'
 import { Navbar } from './navbar'
 import { HeroContent } from './hero-content'
+import { ShowcaseDashboard } from './showcase-dashboard'
 
 export const VideoLanding = () => {
   return (
     <div className="relative w-full bg-black min-h-screen">
-      {/* Fixed Video Background - Optimized for SEO/Performance */}
+      {/* Fixed Video Background */}
       <div className="fixed inset-0 w-full h-full overflow-hidden z-0">
         <video
           autoPlay
@@ -13,7 +13,7 @@ export const VideoLanding = () => {
           muted
           playsInline
           preload="none"
-          poster="/videos/video-poster.webp" // Added poster for better LCP/SEO
+          poster="/videos/video-poster.webp"
           className="absolute inset-0 w-full h-full object-cover"
           aria-hidden="true"
         >
@@ -22,7 +22,7 @@ export const VideoLanding = () => {
         <div className="absolute inset-0 bg-black/10" />
       </div>
 
-      {/* Main Content Wrapper - SSR Friendly */}
+      {/* Main Content Wrapper */}
       <div className="relative z-10 w-full">
         <div className="relative min-h-screen w-full flex flex-col">
           <Navbar />
@@ -30,7 +30,7 @@ export const VideoLanding = () => {
         </div>
       </div>
 
-      <ShowcaseSection />
+      <ShowcaseDashboard />
     </div>
   )
 }
