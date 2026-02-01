@@ -38,11 +38,11 @@ export interface DeviceControlsProps {
 // DEVICE BACKGROUND COMPONENT
 // ============================================================================
 
-const LINES_ANGLE = 0
-const LINES_GAP = 2
+const LINES_ANGLE = 30
+const LINES_GAP = 3
 const LINE_WIDTH = 1
 const LINES_PERIOD = LINE_WIDTH + LINES_GAP
-const LINES_COLOR = 'rgba(0,0,0,0.04)'
+const LINES_COLOR = 'rgba(0,0,0,0.055)'
 
 export function DeviceBackground({ className }: { className?: string }) {
   return (
