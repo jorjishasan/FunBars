@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { motion } from 'motion/react'
 import Link from 'next/link'
 import {
   Tooltip,
@@ -122,6 +123,29 @@ interface DashboardPreviewCardProps {
 function DashboardPreviewCard({ template }: DashboardPreviewCardProps) {
   const [device, setDevice] = useState<DeviceType>('desktop')
 
+  const titleContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.06,
+        delayChildren: 0.02,
+      },
+    },
+  }
+
+  const titleWord = {
+    hidden: { opacity: 0, y: 18, filter: 'blur(8px)' },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: 0.5,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  }
+
   return (
     <div className="flex flex-col gap-4">
       {/* Header: icon + title + description */}
@@ -132,11 +156,28 @@ function DashboardPreviewCard({ template }: DashboardPreviewCardProps) {
               {template.avatarIcon}
             </span>
           </span>
-          <h2 className="text-2xl lg:text-3xl font-instrument-serif tracking-relaxed" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
-            {template.name}
-          </h2>
+          <motion.h2
+            className="text-2xl lg:text-3xl font-instrument-serif tracking-relaxed"
+            style={{ fontFamily: 'var(--font-instrument-serif)' }}
+            variants={titleContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }}
+          >
+            {template.name.split(' ').map((word, index) => (
+              <motion.span
+                key={index}
+                className="inline-block mr-1"
+                variants={titleWord}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.h2>
         </div>
-        <p className="text-zinc-500 text-[14px] leading-[1.5] max-w-md sm:pl-12 text-pretty">
+        <p
+          className="text-zinc-500 text-[14px] leading-[1.5] max-w-md sm:pl-12 text-pretty"
+        >
           {template.description}
         </p>
       </div>
